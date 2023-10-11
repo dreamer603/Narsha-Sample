@@ -17,7 +17,6 @@ public class Reposition : MonoBehaviour
         if (collision.CompareTag("Area"))
         {
             inArea = true;
-            Debug.Log("닿음");
         }
     }
     
@@ -26,7 +25,6 @@ public class Reposition : MonoBehaviour
         if (collision.CompareTag("Area"))
         {
             inArea = false;
-            Debug.Log("안닿음");
         }
     }
     
@@ -37,16 +35,38 @@ public class Reposition : MonoBehaviour
             return;
         }
         
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 myPos = transform.position;
+        float diffX = Mathf.Abs(playerPos.x - myPos.x);
+        float diffZ = Mathf.Abs(playerPos.z - myPos.z);
+        
         Vector3 playerDir = GameManager.instance.player.inputVec;
+        float dirX = playerDir.x < 0 ? -1 : 1;
         float dirZ = playerDir.z < 0 ? -1 : 1;
 
         switch (transform.tag)
         {
             case "Ground":
-                transform.Translate(Vector3.forward * dirZ * tileSize);
-                inArea = true;
-                break;
+                if (diffX > diffZ)
+                {
+                    transform.Translate(Vector3.right * dirX * tileSize);
+                    inArea = true;
+                }
+                
+                else if (diffX < diffZ)
+                {
+                    transform.Translate(Vector3.forward * dirZ * tileSize);
+                    inArea = true;
+                }
 
+                else
+                {
+                    transform.Translate(Vector3.up * dirX * tileSize);
+                    transform.Translate(Vector3.forward * dirZ * tileSize);
+                    inArea = true;
+                }
+
+                break;
             case "Enemy":
 
                 break;

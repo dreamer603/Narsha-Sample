@@ -359,8 +359,10 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Area.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/MoveMap.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/Reposition.cs"
+"Assets/Scripts/TPlayer.cs"
 -langversion:9.0
 
 /deterministic
